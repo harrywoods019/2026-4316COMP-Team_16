@@ -17,7 +17,7 @@ foul_points = df.groupby("HomeTeam").agg({
     "HomeTeamPoints": "sum"
 }).reset_index()
 
-# CREATE SUBPLOTS (2 graphs in 1 window)
+# 2 graphs in 1 window
 
 fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
