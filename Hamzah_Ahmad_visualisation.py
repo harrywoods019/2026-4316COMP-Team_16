@@ -37,18 +37,18 @@ for season in df["Season"].unique():
 
 stats = pd.DataFrame(team_season_data)
 
-#  Scatter plot of cards vs points 
+#  plots of cards vs points 
 
 plt.figure(figsize=(8, 5))
 plt.scatter(stats["Cards"], stats["Points"], alpha=0.4, color="steelblue", s=20)
 
-# trend line
+# th e line
 z = np.polyfit(stats["Cards"], stats["Points"], 1)
 p = np.poly1d(z)
 x_line = np.linspace(stats["Cards"].min(), stats["Cards"].max(), 100)
 plt.plot(x_line, p(x_line), color="orange", linestyle="--", label="Trend")
 
-# correlation value
+#  value
 r = stats["Cards"].corr(stats["Points"])
 plt.text(0.97, 0.97, f"r = {r:.3f}", transform=plt.gca().transAxes,
          ha="right", va="top", fontsize=10,
@@ -62,7 +62,7 @@ plt.tight_layout()
 plt.savefig("cards_vs_points_scatter.png")
 plt.show()
 
-# Average points by card volume band 
+# Average points section 
 
 bins   = [0, 25, 40, 55, 70, 999]
 labels = ["0-25", "26-40", "41-55", "56-70", "70+"]
