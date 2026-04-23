@@ -1,21 +1,5 @@
-"""
-4316COMP Team 16 - Premier League Data Analysis
-================================================
-Combined entry point. Run this file to display all team visualisations.
- 
-Each team member's work is wrapped in its own function:
-  - run_alan()   : Home advantage trend (1993-2025)
-  - run_harry()  : Betting odds prediction accuracy
-  - run_hamzah() : Cards vs points analysis
-  - run_dylan()  : Shots vs goals & fouls vs points
-  - run_tom()    : Match competitiveness & result trends
- 
-CSV files required in the same directory as this script:
-  - PremierLeague.csv   (used by Alan, Harry, Dylan, Tom)
-  - pl_matches.csv      (used by Hamzah)
-"""
- 
-import pandas as pd
+
+ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import os
