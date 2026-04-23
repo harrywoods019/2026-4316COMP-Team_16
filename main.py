@@ -7,9 +7,7 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
  
  
-# ==============================================================
-# ALAN — Home Advantage Trend
-# ==============================================================
+# ALAN
 def run_alan():
     print("\n[Alan] Home Advantage Visualisation...")
     df = pd.read_csv("PremierLeague.csv")
@@ -38,9 +36,7 @@ def run_alan():
     print("[Alan] Done. Saved: home_advantage.png")
  
  
-# ==============================================================
 # HARRY — Betting Odds Prediction Accuracy
-# ==============================================================
 def odds_to_probability(odds):
     return 1 / odds
  
@@ -87,9 +83,7 @@ def run_harry():
     print("[Harry] Done.")
  
  
-# ==============================================================
-# HAMZAH — Cards vs Points Analysis
-# ==============================================================
+# HAMZAH
 def run_hamzah():
     print("\n[Hamzah] Cards vs Points Analysis...")
     df = pd.read_csv("PremierLeague.csv")
@@ -161,9 +155,47 @@ def run_hamzah():
     print("[Hamzah] Done. Saved: cards_vs_points_scatter.png, cards_vs_points_bands.png")
  
  
-# ==============================================================
-# DYLAN — Shots vs Goals & Fouls vs Points
-# ==============================================================
+
+# MATTHEW
+def run_matthew():
+    print("\n[Matthew] Home/Away Goals & Draws per Season...")
+    prem = pd.read_csv("PremierLeague.csv")
+ 
+    # Graph 1: Home vs Away Goals
+    season_goals = prem.groupby("Season")[["FullTimeHomeTeamGoals", "FullTimeAwayTeamGoals"]].sum()
+    seasons = season_goals.index.tolist()
+    home_goals = season_goals["FullTimeHomeTeamGoals"].tolist()
+    away_goals = season_goals["FullTimeAwayTeamGoals"].tolist()
+ 
+    # Graph 2: Drawn matches per season
+    draw_matches = prem["FullTimeHomeTeamGoals"] == prem["FullTimeAwayTeamGoals"]
+    season_draws = prem[draw_matches].groupby("Season").size()
+    season_draws = season_draws.reindex(season_goals.index, fill_value=0)
+    draws = season_draws.tolist()
+ 
+    fig, (top, bottom) = plt.subplots(2, 1, figsize=(12, 10), sharex=True)
+ 
+    top.plot(seasons, home_goals, "gs-", label="Home Goals")
+    top.plot(seasons, away_goals, "rD-", label="Away Goals")
+    top.set_title("Premier League Home Goals vs Away Goals per Season")
+    top.set_ylabel("Total Goals")
+    top.grid()
+    top.legend()
+ 
+    bottom.bar(seasons, draws)
+    bottom.set_title("Premier League Drawn Matches per Season")
+    bottom.set_xlabel("Season")
+    bottom.set_ylabel("No. of draws")
+    bottom.grid(axis="y")
+ 
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+    plt.show()
+    print("[Matthew] Done.")
+ 
+ 
+
+# DYLAN
 def run_dylan():
     print("\n[Dylan] Shots/Goals & Fouls/Points Analysis...")
     df = pd.read_csv("PremierLeague.csv")
@@ -220,9 +252,9 @@ def run_dylan():
     print("[Dylan] Done.")
  
  
-# ==============================================================
-# TOM — Match Competitiveness & Result Trends
-# ==============================================================
+
+# TOM 
+
 def run_tom():
     print("\n[Tom] Match Competitiveness & Result Trends...")
     df = pd.read_csv("PremierLeague.csv")
@@ -272,9 +304,8 @@ def run_tom():
     print("[Tom] Done.")
  
  
-# ==============================================================
-# MAIN — Run all visualisations
-# ==============================================================
+
+# Run all visualisations
 if __name__ == "__main__":
     print("=" * 50)
     print(" 4316COMP Team 16 — PL Data Analysis")
@@ -283,6 +314,7 @@ if __name__ == "__main__":
     run_alan()
     run_harry()
     run_hamzah()
+    run_matthew()
     run_dylan()
     run_tom()
  
