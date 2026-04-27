@@ -363,6 +363,7 @@ def main_menu():
             run_dylan()
             run_tom()
             print("\nAll visualisations complete.")
+            break
         elif choice == "8":
             print("Program ended.")
             break
